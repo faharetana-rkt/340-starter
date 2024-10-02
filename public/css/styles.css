@@ -13,17 +13,155 @@
   font-family: 'Work Sans', sans-serif;
 }
 
+.siteName {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#top-header {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.siteName {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#tools {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  justify-self: end;
+}
+
 body {
   font-family: Manrope;
 }
 
 nav ul {
+  padding-top: 10px;
+  background-color: #023047;
   list-style-type: none;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
+  color: white;
+}
+
+nav {
+  background-color: #023047;
+  height: 2.5rem;
 }
 
 header a {
   text-decoration: none;
 }
 
+#hero {
+  position: relative;
+  width: 450px;
+  height: 250px;
+}
+
+#hero-img {
+  width: 100%;
+  height: auto;
+}
+
+#hero-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255,0.9)
+}
+
+#hero-card h2, #hero-card p {
+  color:#fb8500;
+}
+
+#hero-card p {
+  margin-top: 2.5px;
+  margin-bottom: 2.5px;
+  font-weight: bold;
+}
+
+#hero-card h2 {
+  margin-bottom: 5px;
+}
+
+#own-button {
+  background-color: #fb8500;
+  font-family: 'Work Sans';
+  font-weight: bolder;
+  border: 1.5px solid;
+  border-color: lightgray;
+  padding: 7.5px;
+}
+
+#reviews ul {
+  padding-left: 0;
+  margin-left: 0;
+  list-style-position: inside;
+}
+
+#reviews h2 {
+  margin-bottom: 5px;
+}
+
+#reviews ul li {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.img-wrapper {
+  background-color: #fb8500;
+  width: 175px;
+  height: 93px;
+  border: 2px solid gray;
+  padding-top: 7.5px;
+  padding-bottom: 7.5px;
+}
+
+.img-upgrade {
+  display: block;
+  margin: 0 auto;
+}
+
+.upgrade-card {
+  width: 175px;
+  text-align: center;
+  
+}
+
+#upgrades {
+  width: 400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+#upgrades h2 {
+  margin-bottom: 0;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+#cap {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#flame {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#bumper {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#hub {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}

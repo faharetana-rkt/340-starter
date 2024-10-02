@@ -1,0 +1,82 @@
+@media only screen and (min-width: 768px) {
+    body {
+        background-image: url('/images/site/small_check.jpg');
+    }
+
+    #wrapper {
+        background-color: white;
+        width: 90%;
+        height: 80%;
+        padding: 10px;
+        margin: 0 auto;
+        border-radius: 15px;
+        border: solid 5px #fb8500;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row: 1fr 1fr;
+    }
+    
+    #hero {
+        position: relative;
+        width: 100%;
+        height: 375px;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+      }
+    
+    #reviews {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+
+    #upgrades {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+
+    #hero-img {
+        width: 60%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+      
+    #hero-card {
+        position: absolute;
+        top: 20%;
+        left: 15%;
+        background: rgba(255,255,255,0.9);
+        width: 20%;
+        height: 75%;
+    }
+    
+    #hero-card h2 {
+        font-size: 2rem;
+    }
+
+    #hero-card p {
+        font-size: 1.5rem;
+    }
+
+    #own-button {
+        background-color: #fb8500;
+        font-family: 'Work Sans';
+        font-size: 1.2rem;
+        font-weight: bolder;
+        border: 1.5px solid;
+        border-color: lightgray;
+        margin-top: 1rem;
+        padding: 7.5px;
+        width: 13rem;
+        height: 3rem;
+    }
+}
