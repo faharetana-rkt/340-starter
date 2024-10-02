@@ -60,7 +60,7 @@ header a {
 #hero {
   position: relative;
   width: 450px;
-  height: 250px;
+  height: 300px;
 }
 
 #hero-img {
@@ -70,7 +70,7 @@ header a {
 
 #hero-card {
   position: absolute;
-  top: 0;
+  top: 30%;
   left: 0;
   background: rgba(255,255,255,0.9)
 }
@@ -164,4 +164,8 @@ header a {
 #hub {
   grid-column-start: 2;
   grid-column-end: 3;
+}
+
+footer {
+  margin-top: 50px;
 }
