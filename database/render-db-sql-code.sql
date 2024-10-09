@@ -249,5 +249,17 @@ VALUES   (
     5
   );
 
+--Replaced inventory description
+UPDATE public.inventory
+SET inv_description = REPLACE(inv_description, 'the small interiors', 'a huge interior')
+WHERE inv_model = 'Hummer';
+
+--Update path
+UPDATE public.inventory
+SET inv_thumbnail = REPLACE(inv_thumbnail, 'images', 'images/vehicles'),
+	inv_image = REPLACE(inv_image, 'images', 'images/vehicles');
+
 SELECT * FROM public.inventory
-ORDER BY inv_id ASC 
+ORDER BY inv_id ASC;
+
+
