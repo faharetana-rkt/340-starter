@@ -19,6 +19,15 @@
         grid-gap: 20px;
     }
     
+    #error-message {
+        margin-top: 0;
+        padding-top: 0;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        font-size: 1.3rem;
+    }
+
     #hero {
         position: relative;
         width: 100%;
@@ -86,4 +95,11 @@
     #reviews ul li {
         font-size: 1.35rem;
     }
+
+    #inv-display {
+        grid-row-start: 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
 }

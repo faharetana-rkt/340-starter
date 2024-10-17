@@ -53,6 +53,16 @@ nav {
   height: 2.5rem;
 }
 
+nav ul li a{
+  color: white;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background-color: white;
+  color: #023047;
+}
+
 header a {
   text-decoration: none;
 }
@@ -166,6 +176,62 @@ header a {
   grid-column-end: 3;
 }
 
+/* Selecting car by model */
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#inv-display li {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+  border: 2px solid gray;
+  border-radius: 5px;
+  padding-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 300px;
+  height: 250px;
+}
+
+#inv-display li #vehicle-anchor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 65%;
+}
+
+#inv-display li a img {
+  margin: 0 auto;
+  padding: 5px auto;
+  display: block;
+  border-radius: 5px;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+}
+
+#inv-display h2 {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+#inv-display hr {
+  height: 5px;
+  background-color: black;
+}
+
+.namePrice {
+  max-width: 100%;
+  text-align: center;
+}
+
 footer {
   margin-top: 50px;
 }
+
