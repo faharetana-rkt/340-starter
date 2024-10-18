@@ -231,6 +231,22 @@ header a {
   text-align: center;
 }
 
+
+/*detail page*/
+.vehicle-detail p {
+  padding: 10px;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+}
+
+.vehicle-detail p:nth-child(even) {
+  background-color: #FFAE70 ;
+}
+
+.vehicle-detail img {
+  padding: 15px;
+}
+
 footer {
   margin-top: 50px;
 }
