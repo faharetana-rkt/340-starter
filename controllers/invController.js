@@ -37,4 +37,13 @@ invCont.buildByVehicleId = async function (req, res, next) {
   })
 }
 
+
+/* ***************************
+ *  Forced Error
+ * ************************** */
+invCont.forcedError = async function (req, res, next) {
+  const data = invModel.getInventoryByVehicleId(vehicleId)
+  return data
+}
+
 module.exports = invCont
