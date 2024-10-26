@@ -252,3 +252,100 @@ footer {
   margin-top: 50px;
 }
 
+
+/* Forms login styling */
+.login-container {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 1rem;
+}
+
+[type="text"],
+[type="email"],
+[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 2px;
+  margin-left: 0;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #03045e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 25px;
+}
+
+[type="submit"]:hover {
+  background-color: #3a0ca3;
+}
+
+.login-container  {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 0;
+  padding-bottom: 2.5px;
+}
+
+.signup-text {
+  margin-top: 15px;
+}
+
+.signup-text a {
+  color: #003f88;
+  text-decoration: none;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+/* Register */ 
+.register-container {
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.register-container h3 {
+  margin-bottom: 15px;
+}
+
+.register-container label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+}
+
+#showpwd {
+  width: 100%;
+  padding: 10px;
+  background-color: #03045e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 25px;
+}
+
+#showpwd:hover {
+  background-color: #3a0ca3;
+}
