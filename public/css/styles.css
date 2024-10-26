@@ -349,3 +349,25 @@ footer {
 #showpwd:hover {
   background-color: #3a0ca3;
 }
+
+#messages {
+  color: #d62828;
+}
+
+input:required:invalid, input:focus:invalid {
+  background-image: url(/images/invalid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
+input:required:valid {
+  background-image: url(/images/valid.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+ }
+
+.notice {
+  color:#d62828;
+  font-weight: bold;
+}
+

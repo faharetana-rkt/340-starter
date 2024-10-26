@@ -127,7 +127,7 @@
     }
 
     .login-container {
-        grid-row-start: 2;
+        grid-row-start: 3;
         grid-column-start: 1;
         grid-column-end: 3;
         justify-self: center;
@@ -135,11 +135,23 @@
     }
 
     .register-container {
-        grid-row-start: 2;
+        grid-row-start: 3;
         grid-column-start: 1;
         grid-column-end: 3;
         justify-self: center;
         align-self: center;
     }
 
+    #messages {
+        grid-row-start: 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .notice {
+        grid-row-start: 2;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+       
 }
