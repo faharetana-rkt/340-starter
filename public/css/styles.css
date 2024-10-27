@@ -208,7 +208,7 @@ header a {
 
 #inv-display li a img {
   margin: 0 auto;
-  padding: 5px auto;
+  padding: 5px;
   display: block;
   border-radius: 5px;
   width: auto;
