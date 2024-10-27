@@ -354,16 +354,14 @@ footer {
   color: #d62828;
 }
 
-input:required:invalid, input:focus:invalid {
-  background-image: url(/images/invalid.png);
-  background-position: right top;
-  background-repeat: no-repeat;
+input:required:focus:invalid {
+  border: 2px solid red; /* Set the border color to red for invalid fields */
+  background-color: #ffdddd; /* Light red background */
 }
 
-input:required:valid {
-  background-image: url(/images/valid.png);
-  background-position: right top;
-  background-repeat: no-repeat;
+input:required:focus:valid {
+  border: 2px solid green; /* Set the border color to green for valid fields */
+  background-color: #ddffdd; /* Light green background */
  }
 
 .notice {
@@ -371,3 +369,29 @@ input:required:valid {
   font-weight: bold;
 }
 
+.management a {
+  display: block;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.management a:hover {
+  text-decoration: underline;
+}
+
+.add-classification {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.class-name-instructions {
+  display: block;
+}

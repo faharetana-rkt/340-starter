@@ -4,13 +4,20 @@
     res.redirect('/')
 } %>
 <%- messages() %>
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
 <div class="login-container">
     <h2>Login</h2>
-    <form>
+    <form action="/account/login" method="post">
         <label for="email">Email:</label>
-        <input type="email" name="account_email" id="email" placeholder="Email" required>
+        <input type="email" name="account_email" id="email" placeholder="Email" required value="<%= locals.account_email %>" >
         <label for="password">Password:</label>
-        <input type="password" name="account_password" id="password" placeholder="Password" required>
+        <input type="password" name="account_password" id="password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{12,}$" placeholder="Password" required>
         <small class="password-instructions">Password must be at least 12 characters, include capital 1 letter, 1 number and a 1 special character.</small>
         <button type="button" id="showpwd">Show Password</button>
         <input type="submit" value="Login">

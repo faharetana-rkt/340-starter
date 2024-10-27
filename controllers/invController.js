@@ -16,6 +16,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
     title: className + " vehicles",
     nav,
     grid,
+    errors: null,
   })
 }
 
@@ -34,6 +35,7 @@ invCont.buildByVehicleId = async function (req, res, next) {
     title: year + ' ' + make + ' ' + model,
     nav,
     detail,
+    errors: null,
   })
 }
 
@@ -46,4 +48,67 @@ invCont.forcedError = async function (req, res, next) {
   return data
 }
 
+/* ***************************
+ *  Build Management view
+ * ************************** */
+invCont.buildManagement = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/management", {
+    title: "Vehicle Management",
+    nav,
+    errors: null,
+  })
+}
+
+/* ***************************
+ *  Build Add Classification View
+ * ************************** */
+invCont.buildAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-classification", {
+    title: "Add New Classification",
+    nav,
+    errors: null,
+  })
+}
+
+/* ***************************
+ *  Process Add Classification
+ * ************************** */
+invCont.addClassification = async function (req, res) {
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+  try {
+    const regResult = await invModel.addClassification(classification_name);
+  
+    if (regResult && regResult.rowCount) {
+        nav = await utilities.getNav()
+        req.flash("notice", `Congratulations, classification ${classification_name} successfully added.`);
+        res.status(201).render("inventory/add-classification", {
+            title: "Add New Classification",
+            nav,
+            errors: null,
+        });
+    } else {
+        req.flash("notice", "Sorry, the registration of the new classification failed.");
+        res.status(500).render("inventory/add-classification", {
+            title: "Add New Classification",
+            nav,
+            errors: null,
+        });
+    }
+  } catch (error) {
+    console.error("Registration error:", error); // This logs to your server console
+    req.flash("notice", "An error occurred during registration.");
+    res.status(500).render("inventory/add-classification", {
+        title: "Add New Classification",
+        nav,
+        errors: null,
+    });
+  }
+}
+
+
 module.exports = invCont
+
+
