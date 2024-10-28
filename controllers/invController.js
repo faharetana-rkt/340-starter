@@ -84,14 +84,14 @@ invCont.addClassification = async function (req, res) {
     if (regResult && regResult.rowCount) {
         nav = await utilities.getNav()
         req.flash("notice", `Congratulations, classification ${classification_name} successfully added.`);
-        res.status(201).render("inventory/add-classification", {
+        res.status(201).render("./inventory/add-classification", {
             title: "Add New Classification",
             nav,
             errors: null,
         });
     } else {
         req.flash("notice", "Sorry, the registration of the new classification failed.");
-        res.status(500).render("inventory/add-classification", {
+        res.status(500).render("./inventory/add-classification", {
             title: "Add New Classification",
             nav,
             errors: null,
@@ -100,9 +100,63 @@ invCont.addClassification = async function (req, res) {
   } catch (error) {
     console.error("Registration error:", error); // This logs to your server console
     req.flash("notice", "An error occurred during registration.");
-    res.status(500).render("inventory/add-classification", {
+    res.status(500).render("./inventory/add-classification", {
         title: "Add New Classification",
         nav,
+        errors: null,
+    });
+  }
+}
+
+/* ***************************
+ *  Build Add Inventory View
+ * ************************** */
+invCont.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let selectClassification = await utilities.buildClassificationList()
+  res.render("./inventory/add-inventory", {
+    title: "Add New Vehicle",
+    nav,
+    selectClassification,
+    errors: null,
+  })
+}
+
+
+/* ***************************
+ *  Process Add Inventory
+ * ************************** */
+invCont.addInventory = async function (req, res) {
+  let nav = await utilities.getNav()
+  let selectClassification = await utilities.buildClassificationList()
+  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
+  try {
+    const regResult = await invModel.addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id);
+  
+    if (regResult && regResult.rowCount) {
+        req.flash("notice", `Congratulations, vehicle ${inv_make} ${inv_model} successfully added.`);
+        res.status(201).render("./inventory/management", {
+            title: "Vehicle Management",
+            nav,
+            errors: null,
+        });
+    } else {
+        req.flash("notice", "Sorry, the registration of the new vehicle failed.");
+        res.status(500).render("./inventory/add-inventory", {
+            title: "Add New Vehicle",
+            nav,
+            selectClassification,
+            errors: null,
+        });
+    }
+  } catch (error) {
+    console.error("Registration error:", error); // This logs to your server console
+    console.error("Stack trace:", err.stack);
+    req.flash("notice", "An error occurred during registration of the vehicle.");
+    res.status(500).render("./inventory/add-inventory", {
+        title: "Add New Vehicle",
+        nav,
+        selectClassification,
         errors: null,
     });
   }
