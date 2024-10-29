@@ -79,6 +79,16 @@ invCont.addClassification = async function (req, res) {
   let nav = await utilities.getNav()
   const { classification_name } = req.body
   try {
+    const exists = await invModel.checkExistingClass(classification_name);
+    if (exists) {
+      req.flash("notice", `Classification "${classification_name}" already exists.`);
+      return res.status(400).render("./inventory/add-classification", {
+        title: "Add New Classification",
+        nav,
+        errors: null,
+      });
+    }
+
     const regResult = await invModel.addClassification(classification_name);
   
     if (regResult && regResult.rowCount) {
@@ -128,7 +138,6 @@ invCont.buildAddInventory = async function (req, res, next) {
  * ************************** */
 invCont.addInventory = async function (req, res) {
   let nav = await utilities.getNav()
-  let selectClassification = await utilities.buildClassificationList()
   const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
   try {
     const regResult = await invModel.addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id);
@@ -142,6 +151,7 @@ invCont.addInventory = async function (req, res) {
         });
     } else {
         req.flash("notice", "Sorry, the registration of the new vehicle failed.");
+        let selectClassification = await utilities.buildClassificationList()
         res.status(500).render("./inventory/add-inventory", {
             title: "Add New Vehicle",
             nav,
@@ -153,6 +163,7 @@ invCont.addInventory = async function (req, res) {
     console.error("Registration error:", error); // This logs to your server console
     console.error("Stack trace:", err.stack);
     req.flash("notice", "An error occurred during registration of the vehicle.");
+    let selectClassification = await utilities.buildClassificationList()
     res.status(500).render("./inventory/add-inventory", {
         title: "Add New Vehicle",
         nav,

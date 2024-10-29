@@ -54,6 +54,19 @@ async function addClassification(classification_name){
   }
 }
 
+/* ***************************
+ *  Check if Classification exist
+ * ************************** */
+async function checkExistingClass(classification_name){
+  try {
+    const sql = "SELECT * FROM classification WHERE LOWER(classification_name) = LOWER($1)"
+    const classification = await pool.query(sql, [classification_name])
+    return classification.rowCount > 0
+  } catch (error) {
+    return error.message
+  }
+}
+
 
 /* ***************************
  *  Add Vehicle or Add Inventory
@@ -70,4 +83,4 @@ async function addInventory(inv_make, inv_model, inv_year, inv_description, inv_
 
 
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByVehicleId, addClassification, addInventory};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByVehicleId, addClassification, addInventory, checkExistingClass};
