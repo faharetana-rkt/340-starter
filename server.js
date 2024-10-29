@@ -17,6 +17,8 @@ const accountRoute = require("./routes/accountRoute")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
+
 
 /* ***********************
  * View Engine and Templates
@@ -45,6 +47,12 @@ app.use(function(req, res, next) {
 // Body-Parser
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+// Cookie-Parser
+app.use(cookieParser())
+
+// JWT Check
+app.use(utilities.checkJWTToken)
 
 app.set("view engine", "ejs")
 app.use(expressLayouts)
