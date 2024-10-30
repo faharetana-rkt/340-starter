@@ -4,7 +4,7 @@
     res.redirect('/')
 } %>
 <%- messages() %>
-<% if (errors) { %>
+<% if (errors && errors.length) { %>
     <ul class="notice">
    <% errors.array().forEach(error => { %>
      <li><%= error.msg %></li>
