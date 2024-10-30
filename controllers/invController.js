@@ -53,9 +53,11 @@ invCont.forcedError = async function (req, res, next) {
  * ************************** */
 invCont.buildManagement = async function (req, res, next) {
   let nav = await utilities.getNav()
+  const selectClassification = await utilities.buildClassificationList()
   res.render("./inventory/management", {
     title: "Vehicle Management",
     nav,
+    selectClassification: selectClassification,
     errors: null,
   })
 }
@@ -127,7 +129,7 @@ invCont.buildAddInventory = async function (req, res, next) {
   res.render("./inventory/add-inventory", {
     title: "Add New Vehicle",
     nav,
-    selectClassification,
+    selectClassification: selectClassification,
     errors: null,
   })
 }
@@ -136,8 +138,9 @@ invCont.buildAddInventory = async function (req, res, next) {
 /* ***************************
  *  Process Add Inventory
  * ************************** */
-invCont.addInventory = async function (req, res) {
+invCont.addInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
+  let selectClassification = await utilities.buildClassificationList();
   const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
   try {
     const regResult = await invModel.addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id);
@@ -147,15 +150,16 @@ invCont.addInventory = async function (req, res) {
         res.status(201).render("./inventory/management", {
             title: "Vehicle Management",
             nav,
+            selectClassification: selectClassification,
             errors: null,
         });
     } else {
         req.flash("notice", "Sorry, the registration of the new vehicle failed.");
-        let selectClassification = await utilities.buildClassificationList()
+        selectClassification = await utilities.buildClassificationList()
         res.status(500).render("./inventory/add-inventory", {
             title: "Add New Vehicle",
             nav,
-            selectClassification,
+            selectClassification: selectClassification,
             errors: null,
         });
     }
@@ -167,10 +171,53 @@ invCont.addInventory = async function (req, res) {
     res.status(500).render("./inventory/add-inventory", {
         title: "Add New Vehicle",
         nav,
-        selectClassification,
+        selectClassification: selectClassification,
         errors: null,
     });
   }
+}
+
+/* ***************************
+ *  Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id)
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+  if (invData[0].inv_id) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
+  }
+}
+
+/* ***************************
+ * Build Edit Inventory
+ * ************************** */
+invCont.buildEditInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inv_id)
+  let nav = await utilities.getNav()
+  let vehicleData = await invModel.getInventoryByVehicleId(inv_id)
+  console.log(vehicleData)
+  let selectClassification = await utilities.buildClassificationList(vehicleData.classification_id)
+  console.log(selectClassification)
+  const name = vehicleData.make + ' ' + vehicleData.model
+  res.render("./inventory/edit-inventory", {
+    title: `Edit ${name}`,
+    nav,
+    selectClassification: selectClassification,
+    errors: null,
+    inv_id: vehicleData.inv_id,
+    inv_make: vehicleData.inv_make,
+    inv_model: vehicleData.inv_model,
+    inv_year: vehicleData.inv_year,
+    inv_description: vehicleData.inv_description,
+    inv_image: vehicleData.inv_image,
+    inv_thumbnail: vehicleData.inv_thumbnail,
+    inv_price: vehicleData.inv_price,
+    inv_miles: vehicleData.inv_miles,
+    inv_color: vehicleData.inv_color,
+    classification_id: vehicleData.classification_id
+  })
 }
 
 

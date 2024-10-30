@@ -35,4 +35,10 @@ router.post("/addinv",
     classValidate.checkInvData,
     utilities.handleErrors(invController.addInventory));
 
+// New Route for list of vehicle
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// New Route for editing vehicle
+router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInventory))
+
 module.exports = router;
