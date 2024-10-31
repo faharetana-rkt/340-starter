@@ -41,7 +41,7 @@ validate.checkClassData = async (req, res, next) => {
 
 
 /*  **********************************
-  *  Add Classification Data Validation Rules
+  *  Add Inventory Data Validation Rules
   * ********************************* */
 validate.inventoryRules = () => {
     return [
@@ -107,6 +107,14 @@ validate.inventoryRules = () => {
             .isLength({ min:2 })
             .matches(/^\d+$/)
             .withMessage("Please provide mileage with minimum 2 numbers, only numbers."), //on error this message is sent
+        
+        body("inv_color")
+            .trim()
+            .escape()
+            .notEmpty()
+            .isLength({ min: 3 })
+            .matches(/^[A-Za-z]+$/)
+            .withMessage("Please provide a color name with only letters and at least 3 characters."),
     ]
 }
 
@@ -129,5 +137,29 @@ validate.checkInvData = async (req, res, next) => {
     }
     next()
 }
+
+/* ******************************
+ * Check data and return errors or continue to edit-view
+ * ***************************** */
+validate.checkEditData = async (req, res, next) => {
+    const { inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        let name = `${inv_make} ${inv_model}`
+        let selectClassification = await utilities.buildClassificationList(classification_id)
+        res.render("inventory/edit-inventory", {
+            errors: errors,
+            title: `Edit ${name}`,
+            nav,
+            selectClassification: selectClassification,
+            inv_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id,
+        })
+        return
+    }
+    next()
+}
+
 
 module.exports = validate

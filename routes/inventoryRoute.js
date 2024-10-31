@@ -15,22 +15,24 @@ router.get("/detail/:vehicleId", utilities.handleErrors(invController.buildByVeh
 router.get("/err", utilities.handleErrors(invController.forcedError));
 
 // Route to Management
-router.get("/", utilities.handleErrors(invController.buildManagement));
+router.get("/", utilities.authorizeAdminOrEmployee, utilities.handleErrors(invController.buildManagement));
 
 // Route to build add classification view
-router.get("/addclass", utilities.handleErrors(invController.buildAddClassification));
+router.get("/addclass", utilities.authorizeAdminOrEmployee, utilities.handleErrors(invController.buildAddClassification));
 
 // Route to process add new classificaiton
 router.post("/addclass", 
+    utilities.authorizeAdminOrEmployee,
     classValidate.classificationRules(), 
     classValidate.checkClassData,
     utilities.handleErrors(invController.addClassification));
 
 // Route to build add inventory view
-router.get("/addinv", utilities.handleErrors(invController.buildAddInventory));
+router.get("/addinv", utilities.authorizeAdminOrEmployee, utilities.handleErrors(invController.buildAddInventory));
 
 //Route to process add new inventory or vehicle
 router.post("/addinv",
+    utilities.authorizeAdminOrEmployee,
     classValidate.inventoryRules(),
     classValidate.checkInvData,
     utilities.handleErrors(invController.addInventory));
@@ -39,6 +41,19 @@ router.post("/addinv",
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 // New Route for editing vehicle
-router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditInventory))
+router.get("/edit/:inv_id", utilities.authorizeAdminOrEmployee, utilities.handleErrors(invController.buildEditInventory))
+
+// Route for processing the update
+router.post("/edit/", 
+    utilities.authorizeAdminOrEmployee,
+    classValidate.inventoryRules,
+    classValidate.checkEditData,
+    utilities.handleErrors(invController.editInventory))
+
+// Delete route
+router.get("/delete/:inv_id", utilities.authorizeAdminOrEmployee, utilities.handleErrors(invController.deleteView))
+
+// Route for processing the deletion
+router.post("/delete", utilities.authorizeAdminOrEmployee, utilities.handleErrors(invController.deleteItem))
 
 module.exports = router;

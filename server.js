@@ -54,6 +54,18 @@ app.use(cookieParser())
 // JWT Check
 app.use(utilities.checkJWTToken)
 
+// Middleware to set isLoggedIn and username for views
+app.use((req, res, next) => {
+  if (req.session && req.session.user) {
+    res.locals.isLoggedIn = true;
+    res.locals.username = req.session.user.account_firstname;
+  } else {
+    res.locals.isLoggedIn = false;
+    res.locals.username = null;
+  }
+  next();
+});
+
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout") //not at views root
@@ -78,6 +90,8 @@ app.use(async (req, res, next) => {
 })
 
 
+
+
 /* ***********************
 * Express Error Handler
 * Place after all other middleware
@@ -92,6 +106,8 @@ app.use(async (err, req, res, next) => {
     nav
   })
 })
+
+
 
 /* ***********************
  * Local Server Information

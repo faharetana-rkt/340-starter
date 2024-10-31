@@ -21,11 +21,11 @@
         <label for="model">Model</label>
         <input type="text" id="Model" name="inv_model" placeholder="Min 3 character" pattern="^[A-Za-z ]{3,}$" required value="<%= locals.inv_model %>">
         <label for="description">Description</label>
-        <textarea name="inv_description" rows="3" cols="15" minlength="5" required value="<%= locals.inv_description %>"></textarea>
+        <textarea name="inv_description" rows="3" cols="15" minlength="5" required ><%= locals.inv_description %></textarea>
         <label for="img-path">Image Path</label>
-        <input type="text" id="img-path" name="inv_image" required value="/images/vehicles/no-image.png" value="<%= locals.inv_image %>">
+        <input type="text" id="img-path" name="inv_image" required value="<%= locals.inv_image %>">
         <label for="thmb-path">Thumbnail Path</label>
-        <input type="text" id="thmb-path" name="inv_thumbnail" required value="/images/vehicles/no-image-tn.png" value="<%= locals.inv_thumbnail %>">
+        <input type="text" id="thmb-path" name="inv_thumbnail" required value="<%= locals.inv_thumbnail %>">
         <label for="price">Price</label>
         <input type="text" id="price" name="inv_price" placeholder="decimal or integer" pattern="^\d+(\.\d+)?$" required value="<%= locals.inv_price %>">
         <label for="miles">Miles</label>
@@ -35,5 +35,8 @@
         <label for="color">Color</label>
         <input type="text" id="color" name="inv_color" pattern="^[A-Za-z]{3,}$" required value="<%= locals.inv_color %>">
         <input type="submit" value="Update Vehicle">
+        <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
     </form>
 </div>

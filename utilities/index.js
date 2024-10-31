@@ -148,4 +148,33 @@ Util.checkLogin = (req, res, next) => {
   }
 }
 
+Util.authorizeAdminOrEmployee = (req, res, next) => {
+  const token = req.cookies.token; // Assumes token is stored in cookies
+
+  if (!token) {
+    return res.status(401).render("account/login", {
+      message: "You must be logged in to access this page.",
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    
+    // Check if user has the right role
+    if (decoded.account_type === "Employee" || decoded.account_type === "Admin") {
+      req.user = decoded; // Attach user info to request for further use
+      return next();
+    } else {
+      req.flash("notice", "Insufficient privileges.")
+      return res.redirect("/account/login")
+      };
+    } catch (err) {
+    console.error("Token verification failed:", err);
+      req.flash("notice", "Invalid toke, please login again.")
+      return res.redirect("/account/login")
+    };
+}
+
+
+
 module.exports = Util
