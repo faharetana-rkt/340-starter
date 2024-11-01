@@ -1,0 +1,15 @@
+<h2>Your Wishlist</h2>
+<% if (wishlistItems.length > 0) { %>
+  <ul>
+    <% wishlistItems.forEach(item => { %>
+      <li>
+        <%= item.inv_make %> <%= item.inv_model %> 
+        <form action="/wishlist/remove/<%= item.wishlist_id %>" method="POST" style="display:inline;">
+          <button type="submit">Remove</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>Your wishlist is empty.</p>
+<% } %>

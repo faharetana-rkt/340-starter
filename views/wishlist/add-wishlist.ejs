@@ -1,0 +1,19 @@
+<div class="container">
+    <h1>Add to Your Wishlist</h1>
+
+    <form action="/wishlist/add" method="POST">
+        <label for="invId">Select a Vehicle:</label>
+        <select name="invId" id="invId" required>
+            <% inventoryItems.forEach(item => { %>
+                <option value="<%= item.inv_id %>">
+                    <%= item.inv_make %> <%= item.inv_model %> - <%= item.inv_year %>
+                </option>
+            <% }) %>
+        </select>
+        <button type="submit">Add to Wishlist</button>
+    </form>
+
+    <div>
+        <a href="/wishlist">View My Wishlist</a>
+    </div>
+</div>
